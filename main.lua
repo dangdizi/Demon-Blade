@@ -97,34 +97,6 @@ end
 local priorityList = {} -- tên bắt đầu bằng L
 local normalList = {}   -- còn lại
 
-for _, part in ipairs(folder:GetChildren()) do
-    if part:IsA("BasePart") then
-        if string.sub(part.Name, 1, 1) == "L" then
-            table.insert(priorityList, part)
-        else
-            table.insert(normalList, part)
-        end
-    end
-end
-
---================= COLLECT ƯU TIÊN =================--
--- Collect L trước
-function collect ()
-    local list = (game.PlaceId == 98470671607734) and teleportPoints2 or teleportPoints1
-    for _, cf in ipairs(list) do
-        hrp.CFrame = cf + Vector3.new(0, 1, 0)
-        task.wait(2)
-    end
-
-    for _, part in ipairs(priorityList) do
-        collectPart(part)
-    end
-
-    -- Collect phần còn lại
-    for _, part in ipairs(normalList) do
-        collectPart(part)
-    end
-end
 
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/dangdizi/DiziHub/refs/heads/main/UI-D2.0.lua"))()
@@ -133,8 +105,54 @@ DiziGui:setTitle("Dizi Hub | Demon Blade")
 local autoCollectTab = DiziGui:createTab(nil, "Auto Collect")
 local autoCollectAction = DiziGui:createAction(true)
 autoCollectAction:createLabel("Tu dong nhat xu", Color3.fromRGB(255,255,255))
+local goldStatus = false
+local blueStatus = false
+autoCollectAction:createToggleSwitch("Collect Gold", function (status)
+    goldStatus = status
+end)
+autoCollectAction:createToggleSwitch("Collect Blue", function (status)
+    blueStatus = status
+end)
+
+autoCollectAction:createText("chon truoc khi nhat", Color3.fromRGB(255,255,255))
+autoCollectAction:createHr()
 local collectStatus = false
-autoCollectAction:createButton("Gold & Blue", "Collect", function()
+local teleportCollectStatus = false
+function collect ()
+
+    local list = (game.PlaceId == 98470671607734) and teleportPoints2 or teleportPoints1
+    if not teleportCollectStatus then
+        for _, cf in ipairs(list) do
+            hrp.CFrame = cf + Vector3.new(0, 1, 0)
+            task.wait(2)
+        end
+        for _, part in ipairs(folder:GetChildren()) do
+            if part:IsA("BasePart") then
+                if string.sub(part.Name, 1, 1) == "L" then
+                    table.insert(priorityList, part)
+                else
+                    table.insert(normalList, part)
+                end
+            end
+        end
+    end
+    
+    teleportCollectStatus = true
+
+    if (goldStatus) then
+        for _, part in ipairs(priorityList) do
+            collectPart(part)
+        end
+    end
+
+    if (blueStatus) then
+        for _, part in ipairs(normalList) do
+            collectPart(part)
+        end
+    end
+end
+
+autoCollectAction:createButton("Auto Collect", "Collect", function()
     if not collectStatus then
         collectStatus = true
         collect()
@@ -142,3 +160,20 @@ autoCollectAction:createButton("Gold & Blue", "Collect", function()
     end
 end)
 autoCollectTab:setAction(autoCollectAction)
+
+-- teleport
+
+local teleportTab = DiziGui:createTab(nil, "Teleport")
+local teleportAction = DiziGui:createAction()
+teleportAction:createLabel("Dich Chuyen map an")
+teleportAction:createButton("Muzan raid", "Dich Chuyen", function ()
+    game:GetService("TeleportService"):Teleport(124580522323509, game.Players.LocalPlayer)
+end)
+
+teleportAction:createButton("Summer Event", "Dich Chuyen", function ()
+    game:GetService("TeleportService"):Teleport(18388152457, game.Players.LocalPlayer)
+end)
+
+teleportAction:createHr()
+
+teleportTab:setAction(teleportAction)
