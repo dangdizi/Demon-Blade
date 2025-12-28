@@ -217,7 +217,7 @@ local TeleportAction = DiziGui:createAction()
 
 TeleportAction:createLabel("Dịch chuyển các map", Color3.fromRGB(164, 255, 111))
 
-if not game.PlaceId ~= 98470671607734 then
+if game.PlaceId ~= 98470671607734 then
     TeleportAction:createDropdown("Danh sách map", {
         { label = "Snow Village",       value = CFrame.new(-157.5720, 28.1144, -282.3664) },
         { label = "Training Forest",    value = CFrame.new(899.0273, 55.8635, -2759.9617) },
