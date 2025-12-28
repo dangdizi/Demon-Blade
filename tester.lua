@@ -36,7 +36,8 @@ local ChristmasEventAction = DiziGui:createAction(true)
 -- ===== nhận thưởng =====
 ChristmasEventAction:createLabel("Nhận thưởng hằng ngày", Color3.fromRGB(247, 113, 113))
 ChristmasEventAction:createButton("Thưởng hằng giờ", "Nhận thưởng", function()
-    HumanoidRootPart.CFrame = CFrame.new(-847.2286, 4.6884, -909.4347)
+    local BigTree = workspace.Folder_GameOutside.EventMapOutside.BigTree
+    HumanoidRootPart.CFrame = CFrame.new(BigTree:GetPivot() * Vector3.new(0,3,0))
     local Npc = workspace.Folder_GameOutside.ChristmasEvent.HourNpcGift.HourNpc
     local NpcHumanoidRootPart = Npc:FindFirstChild("HumanoidRootPart") or Npc:FindFirstChildWhichIsA("BasePart")
     HumanoidRootPart.CFrame = NpcHumanoidRootPart.CFrame * CFrame.new(0,3,0)
@@ -49,6 +50,8 @@ ChristmasEventAction:createButton("Thưởng hằng giờ", "Nhận thưởng", 
     game:GetService("ReplicatedStorage").FestivalActivities.ChristmasEvent.HourNpcGift.CollectRF:InvokeServer(unpack(args))
 end)
 ChristmasEventAction:createButton("Thưởng hằng ngày", "Nhận thưởng", function()
+    local BigTree = workspace.Folder_GameOutside.EventMapOutside.BigTree
+    HumanoidRootPart.CFrame = CFrame.new(BigTree:GetPivot() * Vector3.new(0,3,0))
     local Box = workspace.Folder_GameOutside.ChristmasEvent.DayChest:GetChildren()[1]
     HumanoidRootPart.CFrame = CFrame.new (Box:getPivot() * Vector3.new(0, 3, 0))
     task.wait(0.5)
@@ -86,11 +89,21 @@ local TeleportPoints1 = {
 }
 local TeleportPoints2 = {
     CFrame.new(1476.4467, 2186.0842, 229.6751),
+    CFrame.new(1443.9968, 2480.4644, 1372.7373),
+    CFrame.new(81.4240, 2555.2900, 1271.4413),
     CFrame.new(-632.0176, 2157.9177, 3352.4141),
     CFrame.new(4366.5767, 2231.7886, -2482.4802),
+    CFrame.new(4458.6626, 2797.0471, -2489.2322),
+    CFrame.new(4708.2837, 3665.0085, -2466.6021),
+    CFrame.new(-2890.4705, 2537.6365, -2030.8273),
+    CFrame.new(-2921.7197, 3106.6506, -1944.9642),
     CFrame.new(-2440.6157, 2178.1230, -1934.5195),
     CFrame.new(174.9412, 2166.7644, -4257.1714),
-    CFrame.new(3468.3408, 2204.4983, -6875.7144)
+    CFrame.new(-34.6641, 2268.6479, -4983.4814),
+    CFrame.new(3468.3408, 2204.4983, -6875.7144),
+    CFrame.new(4397.0356, 2395.7876, -6392.8174),
+    CFrame.new(4453.9624, 2611.7529, -6869.8496),
+    CFrame.new(4762.5820, 2617.3152, -6967.8115)
 }
 local function CollectPart(part)
     local StartTime = tick()
