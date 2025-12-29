@@ -36,7 +36,7 @@ local ChristmasEventAction = DiziGui:createAction(true)
 -- ===== nhận thưởng =====
 ChristmasEventAction:createLabel("Nhận thưởng hằng ngày", Color3.fromRGB(247, 113, 113))
 ChristmasEventAction:createButton("Thưởng hằng giờ", "Nhận thưởng", function()
-    local BigTree = workspace.Folder_GameOutside.EventMapOutside.BigTree
+    local BigTree = workspace.Folder_GameMap.EventMap.Model
     HumanoidRootPart.CFrame = CFrame.new(BigTree:GetPivot() * Vector3.new(0,3,0))
     local Npc = workspace.Folder_GameOutside.ChristmasEvent.HourNpcGift.HourNpc
     local NpcHumanoidRootPart = Npc:FindFirstChild("HumanoidRootPart") or Npc:FindFirstChildWhichIsA("BasePart")
@@ -50,7 +50,7 @@ ChristmasEventAction:createButton("Thưởng hằng giờ", "Nhận thưởng", 
     game:GetService("ReplicatedStorage").FestivalActivities.ChristmasEvent.HourNpcGift.CollectRF:InvokeServer(unpack(args))
 end)
 ChristmasEventAction:createButton("Thưởng hằng ngày", "Nhận thưởng", function()
-    local BigTree = workspace.Folder_GameOutside.EventMapOutside.BigTree
+    local BigTree = workspace.Folder_GameMap.EventMap.Model
     HumanoidRootPart.CFrame = CFrame.new(BigTree:GetPivot() * Vector3.new(0,3,0))
     local Box = workspace.Folder_GameOutside.ChristmasEvent.DayChest:GetChildren()[1]
     HumanoidRootPart.CFrame = CFrame.new (Box:getPivot() * Vector3.new(0, 3, 0))
